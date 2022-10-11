@@ -1,0 +1,51 @@
+import api from '../../utils/api'
+import {addBusiness, allBusinesses, deleteBusiness, getBusinessDetail, updateBusiness} from "./ActionCreators";
+
+export const handleGetAllBusiness = () => async (dispatch) => {
+  await api().get('/business')
+    .then((res) => {
+      dispatch(allBusinesses(res.data))
+    })
+}
+
+
+export const handleGetBusinessDetail = () => async (dispatch) => {
+  await api().get('/business/detail')
+    .then((res) => {
+      dispatch(getBusinessDetail(res.data))
+    })
+}
+
+
+export const handleAddNewBusiness = (values) => (dispatch) => {
+  return new Promise((resolve, reject) => {
+    api().post('/business', values).then((res) => {
+      dispatch(addBusiness(res.data))
+      resolve()
+    }).catch((err) => {
+      reject(err)
+    })
+  })
+}
+
+export const handleUpdateBusiness = (values) => (dispatch) => {
+  return new Promise((resolve, reject) => {
+    api().post(`/business/${values.id}`, values).then((res) => {
+      dispatch(updateBusiness(res.data))
+      resolve()
+    }).catch((err) => {
+      reject(err)
+    })
+  })
+}
+
+export const handleDeleteBusiness = (id) => (dispatch) => {
+  return new Promise((resolve, reject) => {
+    api().delete(`/business/${id}`).then((res) => {
+      dispatch(deleteBusiness(id))
+      resolve(res)
+    }).catch((err) => {
+      reject(err)
+    })
+  })
+}
