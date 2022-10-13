@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Supplier;
+use App\Models\Account;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,18 +13,14 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('products', static function (Blueprint $table) {
+        Schema::create('account_records', static function (Blueprint $table) {
             $table->id();
-            $table->string('code');
-            $table->string('name');
-            $table->decimal('cost_price');
-            $table->decimal('selling_price');
-            $table->decimal('profit')->comment('Profit on Selling Price');
-            $table->string('brand');
-            $table->integer('quantity');
-            $table->foreignIdFor(Supplier::class)->nullable()->constrained();
+            $table->foreignIdFor(Account::class)->constrained();
+            $table->string('type');
+            $table->double('amount', 10);
+            $table->text('comments')->nullable();
             $table->foreignIdFor(User::class)->constrained();
             $table->softDeletes();
             $table->timestamps();
@@ -38,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('account_records');
     }
 };

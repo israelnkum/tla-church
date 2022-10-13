@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\DispatchOrder;
+use App\Models\Member;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,13 +13,13 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('order_returns', static function (Blueprint $table) {
+        Schema::create('member_classes', static function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(DispatchOrder::class);
-            $table->foreignIdFor(User::class)->constrained();
-            $table->softDeletes();
+            $table->string('name');
+            $table->foreignIdFor(Member::class)->comment('Class Leader')->constrained();
+            $table->foreignIdFor(User::class);
             $table->timestamps();
         });
     }
@@ -29,8 +29,8 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('dispatch_order_returns');
+        Schema::dropIfExists('member_classes');
     }
 };
