@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\MemberClass;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,8 +13,17 @@ class MemberClassSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
-        //
+        $classes = [
+          'Freeman', 'Emmanuel', 'DeGraft'
+        ];
+
+        foreach ($classes as $class){
+            MemberClass::firstOrCreate([
+               'name' => $class,
+               'user_id' => 1
+            ]);
+        }
     }
 }

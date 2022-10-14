@@ -13,13 +13,14 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('member_classes', static function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignIdFor(Member::class)->comment('Class Leader')->constrained();
-            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(Member::class)->nullable()->comment('Class Leader')->constrained();
+            $table->foreignIdFor(User::class)->constrained();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

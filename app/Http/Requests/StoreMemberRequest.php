@@ -11,9 +11,9 @@ class StoreMemberRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,10 +21,11 @@ class StoreMemberRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            //
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
         ];
     }
 }
