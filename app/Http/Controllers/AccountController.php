@@ -25,22 +25,6 @@ class AccountController extends Controller
         return AccountResource::collection(Account::paginate(10));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreAccountRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreAccountRequest $request): JsonResponse|AccountResource
     {
         DB::beginTransaction();
@@ -58,28 +42,6 @@ class AccountController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Account  $account
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Account $account)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Account  $account
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Account $account)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateAccountRequest  $request
@@ -90,7 +52,7 @@ class AccountController extends Controller
     {
         DB::beginTransaction();
         try{
-            $account->Account::update($request->all());
+            $account->update($request->all());
             DB::commit();
             return new AccountResource($account);
         }
@@ -111,13 +73,17 @@ class AccountController extends Controller
     {
         DB::beginTransaction();
         try{
-            $account->Account::delete();
+            $account->delete();
             DB::commit();
-            return response()->json('Account deleted');
+            return response()->json([
+                'message' => 'Account deleted'
+            ]);
         }
         catch(Exception $exception){
             DB::rollBack();
-            return response()->json('Something went wrong');
+            return response()->json([
+                'message' => 'Something went wrong'
+            ]);
         }
     }
 }

@@ -24,17 +24,6 @@ class MemberController extends Controller
     {
         return MembersResource::collection(Member::paginate(10));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -59,28 +48,6 @@ class MemberController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Member $member)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Member $member)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateMemberRequest  $request
@@ -91,7 +58,7 @@ class MemberController extends Controller
     {
         DB::beginTransaction();
         try{
-            $member->Member::update($request->all());
+            $member->update($request->all());
             DB::commit();
             return new MembersResource($member);
         }
@@ -112,13 +79,17 @@ class MemberController extends Controller
     {
         DB::beginTransaction();
         try{
-            $member->delete($member);
+            $member->delete();
             DB::commit();
-            return \response()->json('Member deleted');
+            return response()->json([
+                'message' => 'Member deleted'
+            ]);
         }
         catch(Exception $exception){
                 DB::rollBack();
-                return response()->json('Something went wrong');
+                return response()->json([
+                    'message' => 'Something went wrong'
+                ]);
         }
     }
 }
