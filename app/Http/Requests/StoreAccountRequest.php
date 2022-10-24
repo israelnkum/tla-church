@@ -24,7 +24,7 @@ class StoreAccountRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'date' => 'required'
         ];
     }
 }
