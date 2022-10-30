@@ -4,6 +4,7 @@ const initialState = {
     products: [],
     trucks: [],
     employees: [],
+    memberClasses: [],
 }
 
 export default function commonReducer (state = initialState, action) {
@@ -11,8 +12,8 @@ export default function commonReducer (state = initialState, action) {
         case Types.COMMON_SUPPLIERS:
             return { ...state, suppliers: action.payload }
 
-        case Types.COMMON_PRODUCTS:
-            return { ...state, products: action.payload }
+        case Types.MEMBER_CLASSES:
+            return { ...state, memberClasses: action.payload }
 
         default:
             return state

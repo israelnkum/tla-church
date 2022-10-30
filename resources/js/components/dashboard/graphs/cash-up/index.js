@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {connect} from "react-redux";
 import Chart from 'react-apexcharts'
 
 import ViewAllWrapper from "../../../../commons/view-all-wrapper";
 import {Card} from "antd";
 import Filter from "../filter";
-import {handleGetChartData} from "../../../../actions/cashUps/CashUpsAction";
+import {handleGetChartData} from "../../../../actions/member/MemberAction";
 import PropTypes from "prop-types";
 
 function CashUp ({ getChartData, data }) {

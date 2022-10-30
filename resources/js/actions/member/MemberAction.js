@@ -1,11 +1,11 @@
 import api from '../../utils/api'
-import {addCashUps, addFilter, allCashUps, deleteCashUps, getChartData, updateCashUps} from "./ActionCreators";
+import {addMember, addFilter, allMembers, deleteMember, getChartData, updateMember} from "./ActionCreators";
 import {completeExport} from "../../utils";
 
-export const handleGetAllCashUps = (params) => async (dispatch) => {
+export const handleGetAllMembers = (params) => async (dispatch) => {
     return new Promise((resolve, reject) => {
-        api().get(`/cash-ups?${params}`).then((res) => {
-            dispatch(allCashUps(res.data))
+        api().get(`/members?${params}`).then((res) => {
+            dispatch(allMembers(res.data))
             params?.delete('page')
             params && dispatch(addFilter(Object.fromEntries(params)))
             resolve(res)
@@ -15,11 +15,11 @@ export const handleGetAllCashUps = (params) => async (dispatch) => {
     })
 }
 
-export const handleExportCashUps = (params) => async () => {
+export const handleExportMembers = (params) => async () => {
     return new Promise((resolve, reject) => {
-        api().get(`/cash-ups?${params}`, { responseType: 'blob' })
+        api().get(`/members?${params}`, { responseType: 'blob' })
             .then((res) => {
-                completeExport(res.data, 'Cash-ups')
+                completeExport(res.data, 'Members')
                 resolve()
             }).catch((err) => {
             reject(err)
@@ -29,7 +29,7 @@ export const handleExportCashUps = (params) => async () => {
 
 export const handleGetChartData = (data) => async (dispatch) => {
     return new Promise((resolve, reject) => {
-        api().post('/cash-ups/chart', data)
+        api().post('/members/chart', data)
             .then((res) => {
                 dispatch(getChartData(res.data))
                 resolve(res)
@@ -39,10 +39,10 @@ export const handleGetChartData = (data) => async (dispatch) => {
     })
 }
 
-export const handleAddNewCashUps = (values) => (dispatch) => {
+export const handleAddNewMembers = (values) => (dispatch) => {
     return new Promise((resolve, reject) => {
-        api().post('/cash-ups', values).then((res) => {
-            dispatch(addCashUps(res.data))
+        api().post('/members', values).then((res) => {
+            dispatch(addMember(res.data))
             resolve()
         }).catch((err) => {
             reject(err)
@@ -50,11 +50,11 @@ export const handleAddNewCashUps = (values) => (dispatch) => {
     })
 }
 
-export const handleUpdateCashUps = (values) => (dispatch) => {
+export const handleUpdateMembers = (values) => (dispatch) => {
     return new Promise((resolve, reject) => {
-        api().post(`/cash-ups/${values.get('id')}`, values)
+        api().post(`/members/${values.get('id')}`, values)
             .then((res) => {
-                dispatch(updateCashUps(res.data))
+                dispatch(updateMember(res.data))
                 resolve()
             }).catch((err) => {
             reject(err)
@@ -62,10 +62,10 @@ export const handleUpdateCashUps = (values) => (dispatch) => {
     })
 }
 
-export const handleDeleteCashUps = (id) => (dispatch) => {
+export const handleDeleteMembers = (id) => (dispatch) => {
     return new Promise((resolve, reject) => {
-        api().delete(`/cash-ups/${id}`).then((res) => {
-            dispatch(deleteCashUps(id))
+        api().delete(`/members/${id}`).then((res) => {
+            dispatch(deleteMember(id))
             resolve(res)
         }).catch((err) => {
             reject(err)

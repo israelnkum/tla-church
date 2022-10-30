@@ -39,3 +39,11 @@ export const commonTrucks = (payload) => {
       payload: payload
   }
 }
+
+
+export const commonClasses = (payload) => {
+  return {
+    type: Types.MEMBER_CLASSES,
+      payload: payload
+  }
+}

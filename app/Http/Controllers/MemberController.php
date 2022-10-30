@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\HelperFunctions;
 use App\Http\Requests\StoreMemberRequest;
 use App\Http\Requests\UpdateMemberRequest;
 use App\Http\Resources\MembersResource;
 use App\Models\Member;
+use App\Models\MemberClass;
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class MemberController extends Controller
@@ -17,7 +21,7 @@ class MemberController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return Response|AnonymousResourceCollection
      */
     public function index(): Response|AnonymousResourceCollection
     {
@@ -34,8 +38,24 @@ class MemberController extends Controller
     {
         DB::beginTransaction();
         try{
-            $request['user_id'] = 1;
+            $request['user_id'] = Auth::id();
+            $request['member_class_id'] = $request->member_class_id ?: NULL;
             $member = Member::create($request->all());
+            if ($request->has('create_account') && $request->create_account === 'true'){
+                $data = [
+                    'id' => $member->id,
+                    'first_name' => $request->other_names,
+                    'last_name' => $request->surname,
+                    'email' => $request->email
+                ];
+                HelperFunctions::createUserAccount($member, $data);
+            }
+
+            // upload picture if picture is part of request
+            if ($request->has('file') && $request->file !== "null"){
+                HelperFunctions::saveImage($member, $request->file('file'), 'members');
+            }
+
             DB::commit();
             return new MembersResource($member);
         }
@@ -92,4 +112,10 @@ class MemberController extends Controller
             ], 400);
         }
     }
+
+    public function getClasses(): Collection
+    {
+        return MemberClass::all();
+    }
+
 }

@@ -1,15 +1,14 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import {Route, Routes} from 'react-router-dom'
 import EmployeeForm from "../../components/employees/employee-form";
 import ExpensesForm from "../../components/exepenses/expenses-form";
 import SupplierForm from "../../components/suppliers/supplier-form";
 import TruckForm from "../../components/trucks/truck-form";
-import CashUpForm from "../../components/cash-ups/cash-up-form";
+import MemberForm from "../../components/members/member-form";
 import DispatchOrderForm from "../../components/dispatch-orders/dispatch-order-form";
 import OrderReturnsForm from "../../components/order-returns/order-returns-form";
 import ProductsForm from "../../components/products/products-form";
 import ReceivedOrdersForm from "../../components/received-orders/received-orders-form";
-import OrderDetailModal from "../../components/dispatch-orders/order-detail-modal";
 import OrderReturnItems from "../../components/order-returns/order-return-items";
 
 export const ModalRoutes = () => {
@@ -27,10 +26,8 @@ export const ModalRoutes = () => {
                 <Route exact path="add" element={<ExpensesForm/>}/>
                 <Route exact path="edit" element={<ExpensesForm/>}/>
             </Route>
-            <Route exact path="cash-ups">
-                <Route exact path="add" element={<CashUpForm/>}/>
-                <Route exact path="edit" element={<CashUpForm/>}/>
-                <Route exact path="dispatch-order" element={<OrderDetailModal/>}/>
+            <Route exact path="members">
+                <Route exact path="form" element={<MemberForm/>}/>
             </Route>
             <Route exact path="dispatch-order-returns">
                 <Route exact path="add" element={<OrderReturnsForm/>}/>

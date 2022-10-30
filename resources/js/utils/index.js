@@ -41,200 +41,40 @@ export const activeRoles = () => {
 
 
 export const SidebarMenus = [
-    /*{
+    {
         title: 'HOME',
         link: '/',
         children: [],
         permissions: ['Admin'],
         icon: 'home'
-    },*/
+    },
     {
-        title: 'Staff',
+        title: 'Members',
         link: '#',
         children: [
             {
                 permission: '',
                 modal: true,
-                title: 'Add Staff',
-                link: '/staff/add',
+                title: 'Add Members',
+                link: '/member/form',
             },
             {
                 permission: '',
                 modal: false,
-                title: 'All Staff',
-                link: '/staff',
+                title: 'All Members',
+                link: '/members',
             }
         ],
         permissions: ['Admin'],
         icon: 'pim'
     },
     {
-        title: 'Suppliers',
-        link: '#',
-        children: [
-            {
-                permission: '',
-                modal: true,
-                title: 'Add Supplier',
-                link: '/suppliers/add',
-            },
-            {
-                permission: '',
-                modal: false,
-                title: 'All Suppliers',
-                link: '/suppliers',
-            }
-        ],
-        permissions: ['Admin'],
-        icon: 'pim'
-    },
-    {
-        title: 'Expenses',
-        link: '#',
-        children: [
-            {
-                permission: '',
-                modal: true,
-                title: 'Add Expenses',
-                link: '/expenses/add',
-            },
-            {
-                permission: '',
-                modal: false,
-                title: 'All Expenses',
-                link: '/expenses',
-            }
-        ],
-        permissions: ['Admin'],
-        icon: 'expenses'
-    },
-    {
-        title: 'Cash-ups',
-        link: '/cash-ups',
+        title: 'Accounts',
+        link: '/members',
         children: [],
         permissions: ['Admin'],
         icon: 'cash-up'
-    },
-    /*  {
-          title: 'Order - Returns',
-          link: '#',
-          children: [
-              {
-                  permission: '',
-                  modal: true,
-                  title: 'Add Return',
-                  link: '/dispatch-order-returns/add',
-              },
-              {
-                  permission: '',
-                  modal: false,
-                  title: 'All Returns',
-                  link: '/dispatch-order-returns',
-              }
-          ],
-          permissions: ['Admin'],
-          icon: 'dispatch-order'
-      },*/
-    {
-        title: 'Dispatch Orders',
-        link: '#',
-        children: [
-            {
-                permission: '',
-                modal: true,
-                title: 'Add Dispatch Order',
-                link: '/dispatch-orders/add',
-            },
-            {
-                permission: '',
-                modal: false,
-                title: 'All Dispatch Orders',
-                link: '/dispatch-orders',
-            }
-        ],
-        permissions: ['Admin'],
-        icon: 'dispatch-order'
-    },
-    {
-        title: 'Received Orders',
-        link: '#',
-        children: [
-            {
-                permission: '',
-                modal: true,
-                title: 'Add Orders',
-                link: '/received-orders/add',
-            },
-            {
-                permission: '',
-                modal: false,
-                title: 'All Orders',
-                link: '/received-orders',
-            }
-        ],
-        permissions: ['Admin'],
-        icon: 'dispatch-order'
-    },
-    {
-        title: 'Products',
-        link: '#',
-        children: [
-            {
-                permission: '',
-                modal: true,
-                title: 'Add Product',
-                link: '/products/add',
-            },
-            {
-                permission: '',
-                modal: false,
-                title: 'All Products',
-                link: '/products',
-            }
-        ],
-        permissions: ['Admin'],
-        icon: 'product'
-    },
-    {
-        title: 'Trucks',
-        link: '#',
-        children: [
-            {
-                permission: '',
-                modal: true,
-                title: 'Add Truck',
-                link: '/trucks/add',
-            },
-            {
-                permission: '',
-                modal: false,
-                title: 'All Trucks',
-                link: '/trucks',
-            }
-        ],
-        permissions: ['Admin'],
-        icon: 'trucks'
-    },
-    /*{
-        title: 'Business',
-        link: '#',
-        children: [
-            {
-                permission: '',
-                modal: true,
-                title: 'Add Business',
-                link: '/businesses/add',
-            },
-            {
-                permission: '',
-                modal: false,
-                title: 'All Business',
-                link: '/businesses',
-            }
-        ],
-        permissions: ['Admin'],
-        icon: 'businesses'
-    },*/
+    }
 ]
 
 export const expensesCategories = [

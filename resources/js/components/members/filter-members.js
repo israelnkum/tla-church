@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import {connect} from "react-redux";
 import {Form, Input} from "antd";
 import FilterWrapper from "../../commons/filter/filter-wrapper";
-import {handleExportCashUps, handleGetAllCashUps} from "../../actions/cashUps/CashUpsAction";
+import {handleExportMembers, handleGetAllMembers} from "../../actions/member/MemberAction";
 
-function FilterCashUp (props) {
+function FilterMembers (props) {
     const { submitFilter, filter, exportFilter } = props
 
     return (
@@ -19,19 +19,19 @@ function FilterCashUp (props) {
     )
 }
 
-FilterCashUp.propTypes = {
+FilterMembers.propTypes = {
     submitFilter: PropTypes.func,
     exportFilter: PropTypes.func,
     filter: PropTypes.object,
 }
 
 const mapStateToProps = (state) => ({
-    filter: state.cashUpsReducer.filter
+    filter: state.memberReducer.filter
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    submitFilter: (search, pageNumber) => dispatch(handleGetAllCashUps(search,pageNumber)),
-    exportFilter: (search, pageNumber) => dispatch(handleExportCashUps(search,pageNumber)),
+    submitFilter: (search, pageNumber) => dispatch(handleGetAllMembers(search,pageNumber)),
+    exportFilter: (search, pageNumber) => dispatch(handleExportMembers(search,pageNumber)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(FilterCashUp)
+export default connect(mapStateToProps, mapDispatchToProps)(FilterMembers)
