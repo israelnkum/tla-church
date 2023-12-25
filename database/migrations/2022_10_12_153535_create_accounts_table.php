@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\AccountRecord;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -18,7 +19,8 @@ return new class extends Migration
             $table->id();
             $table->date('date');
             $table->text('comments')->nullable();
-            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(AccountRecord::class)->nullable();
+            $table->foreignIdFor(User::class)->constrained();
             $table->softDeletes();
             $table->timestamps();
         });
