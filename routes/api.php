@@ -36,12 +36,15 @@ Route::group(['middleware' => ['auth:sanctum']], static function () {
         Route::get('/search/{query}', [EmployeeController::class, 'searchEmployees']);
     });
     Route::apiResource('/employees', EmployeeController::class);
+
+
+    Route::apiResource('accounts', AccountController::class);
+
+    Route::apiResource('members', MemberController::class);
+    Route::get('member-classes', [MemberController::class, 'getClasses']);
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('accounts', AccountController::class);
-
-Route::apiResource('members', MemberController::class);

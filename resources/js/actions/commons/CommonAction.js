@@ -1,5 +1,5 @@
 import api from '../../utils/api'
-import {commonDispatchOrders, commonEmployees, commonProducts, commonSuppliers} from "./ActionCreators";
+import {commonClasses, commonDispatchOrders, commonEmployees, commonProducts, commonSuppliers} from "./ActionCreators";
 
 export const handleGetCommonSuppliers = () => async (dispatch) => {
     return new Promise((resolve, reject) => {
@@ -49,6 +49,17 @@ export const handleGetCommonDispatchOrder = (query) => async (dispatch) => {
     return new Promise((resolve, reject) => {
         api().get(`/dispatch-orders/search/${query}`).then((res) => {
             dispatch(commonDispatchOrders(res.data))
+            resolve(res)
+        }).catch((err) => {
+            reject(err)
+        })
+    })
+}
+
+export const handleGetCommonClasses = () => async (dispatch) => {
+    return new Promise((resolve, reject) => {
+        api().get(`/member-classes`).then((res) => {
+            dispatch(commonClasses(res.data))
             resolve(res)
         }).catch((err) => {
             reject(err)

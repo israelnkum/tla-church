@@ -10,7 +10,7 @@ import AllEmployees from "../../components/employees/all-employees";
 import AllExpenses from "../../components/exepenses/all-expenses";
 import AllSuppliers from "../../components/suppliers/all-suppliers";
 import AllTrucks from "../../components/trucks/all-trucks";
-import AllCashUps from "../../components/cash-ups/all-cash-ups";
+import AllMembers from "../../components/members/all-members";
 import AllDispatchOrders from "../../components/dispatch-orders/all-dispatch-orders";
 import AllProducts from "../../components/products/all-products";
 import AllReceivedOrders from "../../components/received-orders/all-received-orders";
@@ -36,7 +36,7 @@ const ProtectedRoutes = () => {
                     <Route path='expenses' element={<AllExpenses/>}/>
                     <Route path='suppliers' element={<AllSuppliers/>}/>
                     <Route path='trucks' element={<AllTrucks/>}/>
-                    <Route path='cash-ups' element={<AllCashUps/>}/>
+                    <Route path='members' element={<AllMembers/>}/>
                     <Route path='dispatch-orders' element={<AllDispatchOrders/>}/>
                     <Route path='dispatch-orders/:orderNumber' element={<DispatchOrderDetail/>}/>
                     <Route path='dispatch-orders/:orderNumber/returns' element={<AllOrderReturns/>}/>

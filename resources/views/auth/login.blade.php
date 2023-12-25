@@ -1,20 +1,28 @@
 @extends('layouts.login')
 @section('content')
-    <div class="container" >
-        <div class="row justify-content-center align-items-center " style="height: 100vh">
-            <div class="col-md-4 text-center">
-                <div class="card login-body shadow-sm border-0 d-flex justify-content-center">
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center "
+             style=" height: 100vh;
+             background: url({{asset('assets/img/login-bg.jpg')}}) center center; background-size: cover">
+            <div class="text-center position-absolute" style="top: 200px; margin-left: auto; margin-right: auto">
+                @if(count($errors) > 0)
+                    @foreach( $errors->all() as $message )
+                        <div class="alert bg-danger text-white alert-dismissible">
+                            <button type="button" class="btn-danger" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <span>{{ $message }}</span>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="card login-body shadow-sm border-0 d-flex justify-content-center py-5" style="border-radius: 10px; opacity: 0.95">
                     <div>
                         <div class="">
-                            <h3 class="title">LOXION Management</h3>
+                            <h5 class="title text-capitalize">Church Management</h5>
                         </div>
                         <div class="card-body">
-                            @if(session()->has('registerError'))
-                                <div class="align-content-center border-danger border text-danger bg-white mb-2 text-center" >
-                                    {{session()->get('registerError')}}
-                                </div>
-                                @php(session()->flush())
-                            @endif
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
                                 <div class="form-group row">
@@ -39,25 +47,25 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <div class="col-md-6 text-left">
+                                    <div class="col-md-12 text-left">
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                                             <label class="custom-control-label" for="remember">{{ __('Remember Me') }}</label>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 text-right">
+                                    {{--<div class="col-md-6 text-right">
                                         @if (Route::has('password.request'))
                                             <a class="" href="{{ route('password.request') }}">
                                                 {{ __('Forgot Password?') }}
                                             </a>
                                         @endif
-                                    </div>
+                                    </div>--}}
                                 </div>
 
                                 <div class="form-group row mb-0">
                                     <div class="col-md-12">
                                         <button type="submit" class="btn btn-primary btn-block">
-                                            {{ __('Login') }}
+                                            {{ __('LOGIN') }}
                                         </button>
                                     </div>
                                 </div>

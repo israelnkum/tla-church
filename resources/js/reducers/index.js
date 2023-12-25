@@ -6,7 +6,7 @@ import userReducer from './UserReducer'
 import expensesReducer from "./expenses-reducer";
 import suppliersReducer from "./suppliers-reducer";
 import trucksReducer from "./trucks-reducer";
-import cashUpsReducer from "./cashup-reducer";
+import memberReducer from "./member-reducer";
 import dispatchOrderReducer from "./dispatch-order-reducer";
 import productReducer from "./product-reducer";
 import commonReducer from "./common-reducer";
@@ -24,7 +24,7 @@ const persistConfig = {
         'expensesReducer',
         'suppliersReducer',
         'trucksReducer',
-        'cashUpsReducer',
+        'memberReducer',
         'dispatchOrderReducer',
         'productReducer',
         'commonReducer',
@@ -41,7 +41,7 @@ const rootReducer = combineReducers({
     expensesReducer,
     suppliersReducer,
     trucksReducer,
-    cashUpsReducer,
+    memberReducer,
     dispatchOrderReducer,
     productReducer,
     commonReducer,

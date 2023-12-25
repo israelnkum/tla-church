@@ -1,38 +1,38 @@
 import { Types } from './Types'
 
 
-export const allCashUps = (payload) => {
+export const allMembers = (payload) => {
   return {
-    type: Types.ALL_CASH_UPS,
+    type: Types.ALL_MEMBERS,
       payload: payload
   }
 }
 
 
-export const addCashUps = (payload) => {
+export const addMember = (payload) => {
     return {
-        type: Types.ADD_CASH_UPS,
+        type: Types.ADD_MEMBERS,
         payload: payload
     }
 }
 
-export const deleteCashUps = (id) => {
+export const deleteMember = (id) => {
   return {
-    type: Types.DELETE_CASH_UPS,
+    type: Types.DELETE_MEMBERS,
       id: id
   }
 }
 
-export const updateCashUps = (payload) => {
+export const updateMember = (payload) => {
   return {
-    type: Types.UPDATE_CASH_UPS,
+    type: Types.UPDATE_MEMBERS,
       payload: payload
   }
 }
 
 export const addFilter = (payload) => {
     return {
-        type: Types.ADD_CASHUP_FILTER,
+        type: Types.ADD_MEMBER_FILTER,
         payload: payload
     }
 }

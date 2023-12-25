@@ -16,13 +16,15 @@ class MemberClassSeeder extends Seeder
     public function run(): void
     {
         $classes = [
-          'Freeman', 'Emmanuel', 'DeGraft'
+            'Freeman',
+            'Emmanuel',
+            'DeGraft'
         ];
 
         foreach ($classes as $class){
             MemberClass::firstOrCreate([
-               'name' => $class,
-               'user_id' => 1
+                'name' => $class,
+                'user_id' => 1
             ]);
         }
     }
