@@ -30,9 +30,8 @@ const AppLayout = (props) => {
                     <Layout>
                         <AppSidebar setCollapsed={toggle} collapsed={open}/>
                         <Layout style={{ marginLeft: isMobile ? 0 : (open ? 80 : 200) }}>
-                            <Layout.Content style={{ margin: '0 15px 50px' }}>
+                            <Layout.Content className={'max-w-screen-2xl'} style={{ margin: '0 15px 50px' }}>
                                 <AppHeader/>
-                                {/*<PageCrumbs/>*/}
                                 <div style={{ minHeight: '100vh', marginTop: 10 }}>
                                     {children}
                                 </div>
