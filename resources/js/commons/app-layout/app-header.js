@@ -4,6 +4,7 @@ import {Affix, Button, Col, Layout, Row} from 'antd'
 import PoweroffOutlined from '@ant-design/icons/lib/icons/PoweroffOutlined'
 import {useDispatch} from 'react-redux'
 import {logout} from '../../actions/logout/LogoutAction'
+import AppsMenu from "./apps-menu";
 
 export default function AppHeader () {
   const dispatch = useDispatch()
@@ -22,7 +23,9 @@ export default function AppHeader () {
             <Layout.Header style={{ borderRadius: '10px', backgroundColor: '#fff', marginTop: 5, borderBottom: 'solid #d9d9d9 1px' }}>
                 <Row justify="space-around" align="middle">
                     <Col  span={17} xs={10} sm={18}>
-                        <Logo/>
+                        <div className={'flex items-center gap-x-2'}>
+                            <AppsMenu/><Logo/>
+                        </div>
                     </Col>
                     <Col span={6} xs={10} sm={6}>
                         <div align={'right'} >

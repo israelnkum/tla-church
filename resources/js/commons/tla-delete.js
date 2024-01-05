@@ -1,42 +1,49 @@
 import React, {useState} from 'react'
 import PropTypes from 'prop-types'
-import {Button, notification, Popconfirm} from 'antd'
+import {Popconfirm, Spin} from 'antd'
 import {connect} from "react-redux";
+import {FiTrash2} from "react-icons/fi";
+import {TlaError, TlaSuccess} from "../utils/messages";
+import {LoadingOutlined} from "@ant-design/icons";
 
-function TlaDelete (props) {
-    const { deleteAction, activeRoles, context} = props
+function TlaDelete(props) {
+    const {deleteAction, activeRoles, context, id} = props
     const [deleting, setDeleting] = useState(false)
+
     const handleDelete = () => {
         setDeleting(true)
-        deleteAction().then(() =>{
-            notification.success({
-                message: 'Success',
-                description: `${context} Deleted`
-            })
+        deleteAction(id).then(() => {
+            TlaSuccess(`${context} Deleted`)
             setDeleting(false)
         }).catch((error) => {
-            notification.warning({
-                message: 'Warning',
-                description: error.response.data
-            })
+            TlaError(error.response.data.message)
             setDeleting(false)
         })
     }
+
     return (
-        activeRoles.includes('Admin') &&
+        // activeRoles.includes('Admin') &&
         <Popconfirm title="Sure to delete?" onConfirm={handleDelete} cancelText={'No'} okText={'Yes'}>
-            <Button loading={deleting} danger>
+            <Spin spinning={deleting} indicator={<LoadingOutlined/>}>
+                <FiTrash2 className={'cursor-pointer'} title={'Delete'}/>
+            </Spin>
+
+            {/*<Button loading={deleting} danger>
                 Delete
-            </Button>
+            </Button>*/}
         </Popconfirm>
     )
 }
 
+TlaDelete.defaultProps = {
+    context: ''
+}
+
 TlaDelete.propTypes = {
     deleteAction: PropTypes.func,
+    id: PropTypes.any,
     activeRoles: PropTypes.array.isRequired,
-    context: PropTypes.string,
-    loading: PropTypes.bool
+    context: PropTypes.string
 }
 const mapStateToProps = (state) => ({
     activeRoles: state.userReducer.activeRoles

@@ -2,21 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CashUp;
-use App\Models\Company;
-use App\Models\DispatchOrder;
-use App\Models\Employee;
 use App\Models\Expense;
-use App\Models\Product;
-use App\Models\ReceivedOrder;
-use App\Models\Supplier;
-use App\Models\Truck;
+use App\Models\Member;
+use App\Models\MemberClass;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
@@ -42,28 +35,22 @@ class HomeController extends Controller
 
     public function getDashboardData(): JsonResponse
     {
-        $staff = Employee::query()->count();
-        $suppliers = Supplier::query()->count();
-        $expenses = Expense::query()->count();
-        $dispatchOrders = DispatchOrder::query()->count();
-        $receivedOrders = ReceivedOrder::query()->count();
-        $trucks = Truck::query()->count();
-        $cashUps = CashUp::query()->count();
-        $products = Product::query()->count();
+
+        $classes = MemberClass::query()->count();
+        $members = Member::query()->count();
+        $status = Member::query()->get()->groupBy('status')->map(function ($item) {
+            return $item->count();
+        });
+
+        $me = MemberClass::query()->with('members')->get()->groupBy('name')->map(function ($item) {
+            return $item[0]->members->count();
+        });
         return response()->json([
-            'staff' => $staff,
-            'suppliers' => $suppliers,
-            'expenses-chart' => 'R'.number_format($expenses,'2'),
-            'dispatch_orders' => $dispatchOrders,
-            'received_orders' => $receivedOrders,
-            'trucks' => $trucks,
-            'cash_ups' => $cashUps,
-            'products' => $products,
+            'classes' => $classes,
+            'members' => $members,
+            'status' => $status->all(),
+            'classGroups' => $me
         ]);
     }
 
-    public function getBusinessDetail()
-    {
-        return Company::first();
-    }
 }

@@ -2,7 +2,6 @@
 
 namespace App\View\Components;
 
-use App\Models\Company;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -26,7 +25,6 @@ class PrintHeader extends Component
      */
     public function render(): View|Closure|string
     {
-        $business = Company::first();
-        return view('components.print-header', compact('business'));
+        return view('components.print-header');
     }
 }

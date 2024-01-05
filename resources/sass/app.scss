@@ -1,12 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Variables
 @import 'variables';
 
-@import '~antd/dist/antd.css';
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
-@import 'app-voting';
+@import '~antd/dist/reset.css';
+@import 'app-common';
+@import "tla-modal";
+@import "tla-pagination.css";
 
-
+@layer {
+    .ant-btn-primary {
+        @apply bg-blue-500 #{!important};
+        @apply  border-blue-500 #{!important};
+    }
+}

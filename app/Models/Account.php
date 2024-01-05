@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Account extends Model
@@ -14,13 +15,12 @@ class Account extends Model
     protected $fillable = [
         'date',
         'comments',
-        'account_record_id', 
         'user_id'
     ];
 
-    public function accountRecord(): BelongsTo
+    public function accountRecords(): HasMany
     {
-        return $this->belongsTo(AccountRecord::class);
+        return $this->hasMany(AccountRecord::class);
     }
 
     public function user(): BelongsTo{

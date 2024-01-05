@@ -5,8 +5,9 @@ import {connect} from 'react-redux'
 import {useLocation} from "react-router-dom";
 import {handleAddNewMembers, handleUpdateMembers} from "../../actions/member/MemberAction";
 import moment from "moment/moment";
-import TlaFormWrapper from "../../commons/form/tla-form-wrapper";
+import TlaModalFormWrapper from "../../commons/form/tla-modal-form-wrapper";
 import ChangePicture from "../commons/change-picture";
+import MemberClass from "../../commons/form/member-class";
 function MemberForm (props) {
     const { memberClasses, addMembers, updateMembers } = props
     const [selectedFile, setSelectedFile] = useState(null)
@@ -19,11 +20,11 @@ function MemberForm (props) {
     }
 
     return (
-        <TlaFormWrapper width={600}
-            file={selectedFile}
-            initialValues={formValues}
-            onSubmit={formValues.id === 0 ? addMembers : updateMembers}
-            formTitle={`${(formValues.id === 0 ? "New" : "Edit")} Member Info`}>
+        <TlaModalFormWrapper width={700}
+                             file={selectedFile}
+                             initialValues={formValues}
+                             onSubmit={formValues.id === 0 ? addMembers : updateMembers}
+                             formTitle={`${(formValues.id === 0 ? "New" : "Edit")} Member Info`}>
             <Row gutter={10}>
                 <Col span={24}>
                     <div align={'center'}>
@@ -74,7 +75,7 @@ function MemberForm (props) {
                             message: 'Gender is Required'
                         }
                     ]}>
-                        <Select size={'large'}>
+                        <Select size={'large'} showSearch>
                             <Select.Option value={'Male'}>Male</Select.Option>
                             <Select.Option value={'Female'}>Female</Select.Option>
                         </Select>
@@ -92,19 +93,11 @@ function MemberForm (props) {
                     </Form.Item>
                 </Col>
                 <Col span={8}>
-                    <Form.Item name="member_class_id" label="Class">
-                        <Select size={'large'}>
-                            {
-                                memberClasses.map(({ id, name }) => (
-                                    <Select.Option key={id} value={id}>{name}</Select.Option>
-                                ))
-                            }
-                        </Select>
-                    </Form.Item>
+                    <MemberClass/>
                 </Col>
                 <Col span={8}>
                     <Form.Item name="class_leader" label="Class Leader">
-                        <Select size={'large'}>
+                        <Select size={'large'} showSearch>
                             <Select.Option value={'Asst.'}>Asst.</Select.Option>
                             <Select.Option value={'Main'}>Main</Select.Option>
                         </Select>
@@ -152,7 +145,7 @@ function MemberForm (props) {
                     </Form.Item>
                 </Col>
             </Row>
-        </TlaFormWrapper>
+        </TlaModalFormWrapper>
     )
 }
 MemberForm.propTypes = {

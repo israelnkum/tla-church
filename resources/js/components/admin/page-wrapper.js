@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import {connect} from 'react-redux'
 import {Outlet} from 'react-router'
 import {Button, Card, Col, Row, Space} from 'antd'
 import {FiPlus} from 'react-icons/fi'
@@ -11,19 +10,21 @@ import TlaImage from "../../commons/tla-image";
 import PageCrumbs from "./page-crumbs";
 
 const GlobalStyles = createGlobalStyle`
-      .inner-card .ant-card-body {
+    .inner-card .ant-card-body {
         padding: 10px;
-      }
-      .inner-card .ant-card-head {
-        padding: 0 10px ;
-      }
-      .inner-card .ant-card-head-title {
+    }
+
+    .inner-card .ant-card-head {
+        padding: 0 10px;
+    }
+
+    .inner-card .ant-card-head-title {
         padding: 10px 0;
-      }
-    `
+    }
+`
 
 
-function PageWrapper () {
+function PageWrapper() {
     const [pageInfo, setPageInfo] = useState({});
     const [extra, setExtra] = useState(<></>);
 
@@ -32,7 +33,7 @@ function PageWrapper () {
             <Col span={12}>
                 <Space>
                     {/*<Button icon={<FiArrowLeft/>}>Go Back</Button>*/}
-                    <h3 className="text-title" style={{ fontSize: 18, paddingTop: 5 }}>{pageInfo.title}</h3>
+                    <h3 className="text-title" style={{fontSize: 18, paddingTop: 5}}>{pageInfo.title}</h3>
                 </Space>
             </Col>
             <Col span={12}>
@@ -42,17 +43,19 @@ function PageWrapper () {
                         {
                             pageInfo.modalLink ?
                                 <Link to={pageInfo.addLink}>
-                                    <Button size={'large'} type={'default'}>{pageInfo.buttonText ?? pageInfo.title}</Button>
+                                    <Button size={'large'}
+                                            type={'default'}>{pageInfo.buttonText ?? pageInfo.title}</Button>
                                 </Link> :
                                 <TlaAddNew link={pageInfo.addLink} data={pageInfo?.extraInfo}>
-                                    <Button size={'large'} type={'primary'} icon={<FiPlus/>}>&nbsp;Add {pageInfo.buttonText ?? pageInfo.title}</Button>
+                                    <Button type={'primary'}
+                                            icon={<FiPlus/>}>&nbsp;Add {pageInfo.buttonText ?? pageInfo.title}</Button>
                                 </TlaAddNew>
                         }
 
                     </div>
                 }
                 {
-                    pageInfo.image && <div align={'right'}> <TlaImage size={40} src={'Avatar'}/></div>
+                    pageInfo.image && <div align={'right'}><TlaImage size={40} src={'Avatar'}/></div>
                 }
             </Col>
         </Row>
@@ -60,21 +63,21 @@ function PageWrapper () {
     return (
         <>
             <GlobalStyles/>
-            <Card size={'small'}>
-                <PageCrumbs/> <br/>
-                <Card className={'inner-card'}
-                      title={PageTitle}>
-                    <Row align={'middle'} justify={'space-between'}>
-                        <Col span={12}>
-                            {extra}
-                        </Col>
-                        <Col span={8}>
-                            {/*<TlaSearch/>*/}
-                        </Col>
-                    </Row>
-                    <Outlet context={{setPageInfo, setExtra }}/>
-                </Card>
-            </Card>
+            <PageCrumbs/>
+            <div className={'inner-card'}
+                  // title={PageTitle}
+            >
+                <h3>{PageTitle}</h3>
+                <Row align={'middle'} justify={'space-between'}>
+                    <Col span={12}>
+                        {extra}
+                    </Col>
+                    <Col span={8}>
+                        {/*<TlaSearch/>*/}
+                    </Col>
+                </Row>
+                <Outlet context={{setPageInfo, setExtra}}/>
+            </div>
         </>
     )
 }
@@ -90,4 +93,4 @@ PageWrapper.propTypes = {
     pageInfo: PropTypes.object
 }
 
-export default connect()(PageWrapper)
+export default PageWrapper

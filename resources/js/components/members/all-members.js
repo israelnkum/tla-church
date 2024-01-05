@@ -5,19 +5,21 @@ import {connect} from "react-redux";
 import TlaTableWrapper from "../../commons/table/tla-table-wrapper";
 import {useOutletContext} from 'react-router'
 import ViewAllWrapper from "../../commons/view-all-wrapper";
-import {handleGetAllMembers} from "../../actions/member/MemberAction";
+import {handleGetAllMembers, handlePrintMember} from "../../actions/member/MemberAction";
 import TlaEdit from "../../commons/tla-edit";
-import FilterCashUp from "./filter-members";
+import FilterMembers from "./filter-members";
 import TlaImage from "../../commons/tla-image";
+import TlaPrintButton from "../../commons/tla-print-button";
 
-const { Column } = Table
-function AllMembers (props) {
-    const { getMembers, members, filter } = props
-    const { data, meta }= members
+const {Column} = Table
+
+function AllMembers(props) {
+    const {getMembers, printMember, members, filter} = props
+    const {data, meta} = members
     const [loading, setLoading] = useState(true)
-    const { setPageInfo } = useOutletContext();
+    const {setPageInfo} = useOutletContext();
     useEffect(() => {
-        setPageInfo({ title: 'Members', addLink: 'members/form', buttonText: 'Member' })
+        setPageInfo({title: 'Members', addLink: 'members/form', buttonText: 'Member'})
         getMembers(new URLSearchParams(filter)).then(() => {
             setLoading(false)
         })
@@ -25,18 +27,18 @@ function AllMembers (props) {
 
     return (
         <>
-            <FilterCashUp/>
+            <FilterMembers/>
             <ViewAllWrapper loading={loading} noData={data.length === 0}>
                 <TlaTableWrapper filterObj={filter} callbackFunction={getMembers} data={data} meta={meta}>
-                    <Column title="photo" render={({name}) => (
-                        <TlaImage name={name} src={null} size={40}/>
-                    )}/> <Column title="phone number" render={({name, status}) => (
-                        <Space direction={'vertical'}>
-                            <Typography.Text>{name}</Typography.Text>
-                            <Tag>{status}</Tag>
-                        </Space>
-                    )}/>
-                    <Column title="class" dataIndex={['member_class','name']}/>
+                    <Column title="photo" render={({name, photo}) => (
+                        <TlaImage preview name={name} src={photo} size={40}/>
+                    )}/> <Column title="Name" render={({name, status}) => (
+                    <Space direction={'vertical'}>
+                        <Typography.Text>{name}</Typography.Text>
+                        <Tag>{status}</Tag>
+                    </Space>
+                )}/>
+                    <Column title="class" dataIndex={['member_class', 'name']}/>
                     <Column title="phone number" render={({phone_number, alt_phone_number}) => (
                         <Space direction={'vertical'}>
                             <Typography.Text>{phone_number}</Typography.Text>
@@ -45,7 +47,11 @@ function AllMembers (props) {
                     )}/>
                     <Column title="home town" dataIndex={'home_town'}/>
                     <Column title="Actions" render={(record) => (
-                        <TlaEdit data={record} icon link={'form'}/>
+                        <div className={'flex items-center gap-x-2'}>
+                            <TlaEdit data={record} icon link={'form'}/>
+                            <TlaPrintButton callback={printMember} data={record.id}/>
+                        </div>
+
                     )}/>
                 </TlaTableWrapper>
             </ViewAllWrapper>
@@ -56,6 +62,7 @@ function AllMembers (props) {
 AllMembers.propTypes = {
     pageInfo: PropTypes.object,
     getMembers: PropTypes.func,
+    printMember: PropTypes.func,
     members: PropTypes.object,
     filter: PropTypes.object,
 }
@@ -66,7 +73,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    getMembers: (payload) => dispatch(handleGetAllMembers(payload))
+    getMembers: (payload) => dispatch(handleGetAllMembers(payload)),
+    printMember: (id) => dispatch(handlePrintMember(id)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllMembers)

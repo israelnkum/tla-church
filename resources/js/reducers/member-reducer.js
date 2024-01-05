@@ -5,7 +5,9 @@ const initialState = {
         meta: {}
     },
     filter: {
-        truck_code: ''
+        class_id: 'all',
+        status: 'all',
+        name: ''
     },
     chart: {
         labels: [],

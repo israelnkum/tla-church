@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AccountRecordController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MemberController;
@@ -39,12 +40,15 @@ Route::group(['middleware' => ['auth:sanctum']], static function () {
 
 
     Route::apiResource('accounts', AccountController::class);
+    Route::apiResource('account-records', AccountRecordController::class);
 
+    Route::get('/members/search/{query}', [MemberController::class, 'searchMembers']);
     Route::apiResource('members', MemberController::class);
     Route::get('member-classes', [MemberController::class, 'getClasses']);
+    Route::get('members/print/{member}', [MemberController::class, 'printMember']);
+
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-

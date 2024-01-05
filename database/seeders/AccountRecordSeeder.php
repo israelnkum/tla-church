@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\AccountRecord;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,6 +15,6 @@ class AccountRecordSeeder extends Seeder
      */
     public function run()
     {
-        //
+        AccountRecord::factory()->count(10)->create();
     }
 }

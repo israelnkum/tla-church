@@ -8,7 +8,9 @@ export default function TlaImage ({ src, size, name, preview }) {
         <>
             {
                 src === null
-                    ? <Avatar style={{ background: 'var(--Primary-400)' }} size={size} src={src}>{getInitials(name)}</Avatar>
+                    ? <Avatar style={{ background: 'var(--Primary-400)', fontSize: 10 }} size={size} src={src}>
+                        {getInitials(name)}
+                </Avatar>
                     : <Avatar style={{ background: 'var(--Primary-400)' }}
                               size={size}
                               src={preview ? <Image src={src} /> : src}>{getInitials(name)}

@@ -1,15 +1,9 @@
 import React from 'react'
 import {Route, Routes} from 'react-router-dom'
 import EmployeeForm from "../../components/employees/employee-form";
-import ExpensesForm from "../../components/exepenses/expenses-form";
-import SupplierForm from "../../components/suppliers/supplier-form";
-import TruckForm from "../../components/trucks/truck-form";
 import MemberForm from "../../components/members/member-form";
-import DispatchOrderForm from "../../components/dispatch-orders/dispatch-order-form";
-import OrderReturnsForm from "../../components/order-returns/order-returns-form";
-import ProductsForm from "../../components/products/products-form";
-import ReceivedOrdersForm from "../../components/received-orders/received-orders-form";
-import OrderReturnItems from "../../components/order-returns/order-return-items";
+import RecordForm from "../../components/accounts/records/record-form";
+import MoneyForm from "../../components/accounts/records/detail/money-form";
 
 export const ModalRoutes = () => {
   return (
@@ -18,42 +12,12 @@ export const ModalRoutes = () => {
                 <Route exact path="add" element={<EmployeeForm/>}/>
                 <Route exact path="edit" element={<EmployeeForm/>}/>
             </Route>
-            <Route exact path="suppliers">
-                <Route exact path="add" element={<SupplierForm/>}/>
-                <Route exact path="edit" element={<SupplierForm/>}/>
-            </Route>
-            <Route exact path="expenses">
-                <Route exact path="add" element={<ExpensesForm/>}/>
-                <Route exact path="edit" element={<ExpensesForm/>}/>
-            </Route>
             <Route exact path="members">
                 <Route exact path="form" element={<MemberForm/>}/>
             </Route>
-            <Route exact path="dispatch-order-returns">
-                <Route exact path="add" element={<OrderReturnsForm/>}/>
-                <Route exact path="edit" element={<OrderReturnsForm/>}/>
-            </Route>
-            <Route exact path="dispatch-orders">
-                <Route exact path="add" element={<DispatchOrderForm/>}/>
-                <Route exact path="edit" element={<DispatchOrderForm/>}/>
-                <Route exact path=":orderId/return" element={<OrderReturnsForm/>}/>
-                <Route exact path=":orderId/returns/items" element={<OrderReturnItems/>}/>
-            </Route>
-            <Route exact path="received-orders">
-                <Route exact path="add" element={<ReceivedOrdersForm/>}/>
-                <Route exact path="edit" element={<ReceivedOrdersForm/>}/>
-            </Route>
-            <Route exact path="products">
-                <Route exact path="add" element={<ProductsForm/>}/>
-                <Route exact path="edit" element={<ProductsForm/>}/>
-            </Route>
-            <Route exact path="trucks">
-                <Route exact path="add" element={<TruckForm/>}/>
-                <Route exact path="edit" element={<TruckForm/>}/>
-            </Route>
-            <Route exact path="businesses">
-                <Route exact path="add" element={<EmployeeForm/>}/>
-                <Route exact path="edit" element={<EmployeeForm/>}/>
+            <Route exact path="accounts/records">
+                <Route exact path="form" element={<RecordForm/>}/>
+                <Route exact path=":id/details/form" element={<MoneyForm/>}/>
             </Route>
         </Routes>
   )

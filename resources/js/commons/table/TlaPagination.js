@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Pagination from 'react-js-pagination'
-import { Card, Typography } from 'antd'
-import { FiArrowLeft, FiArrowRight } from 'react-icons/fi'
+import {Typography} from 'antd'
+import {FiArrowLeft, FiArrowRight} from 'react-icons/fi'
 
 function TlaPagination (props) {
     const { meta, loadData, children, showHeader, extra } = props
@@ -11,11 +11,12 @@ function TlaPagination (props) {
         <div>
             {
                 (showHeader || extra) &&
-                <Card bordered={false} size={'small'} extra={extra} title={
+                <div className={'flex items-center justify-between py-3'}>
                     <Typography.Text>
                         {meta.from} - {meta.to} of {meta.total}
                     </Typography.Text>
-                }/>
+                    {extra}
+                </div>
             }
             {children}
             <div style={{ marginTop: 10 }} align={'right'}>

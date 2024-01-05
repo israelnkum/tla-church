@@ -1,21 +1,30 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {connect} from "react-redux";
+import {connect, useSelector} from "react-redux";
 import {Form, Input} from "antd";
 import FilterWrapper from "../../commons/filter/filter-wrapper";
 import {handleExportMembers, handleGetAllMembers} from "../../actions/member/MemberAction";
+import TlaSelect from "../../commons/form/tla-select";
 
-function FilterMembers (props) {
-    const { submitFilter, filter, exportFilter } = props
+function FilterMembers(props) {
+    const memberClasses = useSelector(state => state.commonReducer.memberClasses)
+
+    const {submitFilter, filter, exportFilter} = props
 
     return (
-       <FilterWrapper initialValue={filter} submitFilter={submitFilter} exportFilter={exportFilter}>
-           <div>
-               <Form.Item name="truck_code" label="Truck Code">
-                  <Input />
-               </Form.Item>
-           </div>
-       </FilterWrapper>
+        <FilterWrapper initialValue={filter} submitFilter={submitFilter} exportFilter={exportFilter}>
+            <div className={'flex flex-wrap gap-3'} style={{gap: 10}}>
+                <Form.Item name="name" label="Name">
+                    <Input size={'large'}/>
+                </Form.Item>
+                <div style={{width: 200}}>
+                    <TlaSelect hasAll name={'class_id'} optionKey={'name'} options={memberClasses} label={'Class'}/>
+                </div>
+                <div style={{width: 200}}>
+                    <TlaSelect hasAll name={'status'} optionKey={'self'} options={['active', 'invalid']} label={'Status'}/>
+                </div>
+            </div>
+        </FilterWrapper>
     )
 }
 
@@ -30,8 +39,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    submitFilter: (search, pageNumber) => dispatch(handleGetAllMembers(search,pageNumber)),
-    exportFilter: (search, pageNumber) => dispatch(handleExportMembers(search,pageNumber)),
+    submitFilter: (params) => dispatch(handleGetAllMembers(params)),
+    exportFilter: (params) => dispatch(handleExportMembers(params))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilterMembers)

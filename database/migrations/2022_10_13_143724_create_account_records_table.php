@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Account;
+use App\Models\Member;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->string('type');
             $table->double('amount', 10);
             $table->text('comments')->nullable();
+            $table->foreignIdFor(Member::class)->nullable()->constrained();
             $table->foreignIdFor(User::class)->constrained();
             $table->softDeletes();
             $table->timestamps();

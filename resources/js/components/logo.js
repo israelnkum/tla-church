@@ -1,8 +1,8 @@
 import React from 'react'
 export default function Logo () {
     return (
-        <>
-            LOXION&nbsp;Management
-        </>
+        <div>
+            Emmanuel&nbsp;Society
+        </div>
   )
 }

@@ -15,6 +15,17 @@ export const handleGetAllMembers = (params) => async (dispatch) => {
     })
 }
 
+export const handlePrintMember = (id) => async () => {
+    return new Promise((resolve, reject) => {
+        api().get(`/members/print/${id}`, { responseType: 'blob' }).then((res) => {
+            completeExport(res.data, 'Member')
+            resolve(res)
+        }).catch((err) => {
+            reject(err)
+        })
+    })
+}
+
 export const handleExportMembers = (params) => async () => {
     return new Promise((resolve, reject) => {
         api().get(`/members?${params}`, { responseType: 'blob' })

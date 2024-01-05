@@ -1,7 +1,8 @@
 import Cookies from 'js-cookie'
-import { Store } from './Store'
+import {Store} from './Store'
 import cookie from 'cookie'
 import api from './api'
+
 export const isLoggedIn = (reqCookies = null) => {
     // if we don't have request cookies, get the cookie from client
     if (!reqCookies) {
@@ -40,48 +41,76 @@ export const activeRoles = () => {
 }
 
 
-export const SidebarMenus = [
-    {
-        title: 'HOME',
-        link: '/',
-        children: [],
-        permissions: ['Admin'],
-        icon: 'home'
-    },
-    {
-        title: 'Members',
-        link: '#',
-        children: [
-            {
-                permission: '',
-                modal: true,
-                title: 'Add Members',
-                link: '/member/form',
-            },
-            {
-                permission: '',
-                modal: false,
-                title: 'All Members',
-                link: '/members',
-            }
-        ],
-        permissions: ['Admin'],
-        icon: 'pim'
-    },
-    {
-        title: 'Accounts',
-        link: '/members',
-        children: [],
-        permissions: ['Admin'],
-        icon: 'cash-up'
-    }
-]
+export const SidebarMenus = {
+    members: [
+        {
+            title: 'HOME',
+            link: '/',
+            children: [],
+            permissions: ['Admin'],
+            icon: 'home'
+        },
+        {
+            title: 'Add Member',
+            link: '/members/form',
+            children: [],
+            permissions: ['Admin'],
+            icon: 'pim',
+            modal: true
+        },
+        {
+            title: 'All Members',
+            link: '/members/all',
+            children: [],
+            permissions: ['Admin'],
+            icon: 'pim',
+            modal: false
+        }
+    ],
+    accounts: [
+        {
+            title: 'HOME',
+            link: '/accounts/home',
+            children: [],
+            permissions: ['Admin'],
+            icon: 'home'
+        },
+        {
+            title: 'Add Record',
+            link: '/accounts/records/form',
+            children: [],
+            permissions: ['Admin'],
+            icon: 'pim',
+            modal: true
+        },
+        {
+            title: 'All Records',
+            link: '/accounts/records',
+            children: [],
+            permissions: ['Admin'],
+            icon: 'pim',
+            modal: false
+        },
+    ]
+}
 
 export const expensesCategories = [
     'Fuel',
     'Salary',
     'Utility',
     'Bills',
+]
+
+export const moneyTypes = [
+    'tithe',
+    '1st offertory',
+    '2nd offertory',
+    'donation',
+    'children service',
+    'thanksgiving',
+    'appeal',
+    'pledge',
+    'seed',
 ]
 
 export const capitalize = (word) => {
@@ -115,20 +144,20 @@ export const completeExport = (data, filename = 'report') => {
 
     const extension = data.type.split('/')[1] === 'pdf' ? 'pdf' : 'xlsx';
 
-    if (extension === 'pdf'){
+    if (extension === 'pdf') {
         const blobURL = URL.createObjectURL(new Blob([data], {type: 'application/pdf'}));
-        const iframe =  document.createElement('iframe');
+        const iframe = document.createElement('iframe');
         document.body.appendChild(iframe);
 
         iframe.style.display = 'none';
         iframe.src = blobURL;
-        iframe.onload = function() {
-            setTimeout(function() {
+        iframe.onload = function () {
+            setTimeout(function () {
                 iframe.focus();
                 iframe.contentWindow.print();
             }, 1);
         };
-    }else{
+    } else {
         const link = document.createElement('a')
         link.href = window.URL.createObjectURL(new Blob([data]))
         link.setAttribute('download', `${filename + '.' + extension}`)

@@ -14,9 +14,9 @@ function Filter (props) {
 
     useEffect(() => {
         setLoading(true)
-        callback({}).then(() => {
+        /*callback({}).then(() => {
             setLoading(false)
-        })
+        })*/
     }, [])
     const [form] = Form.useForm()
     return (

@@ -17,7 +17,9 @@ class AccountFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'date' => $this->faker->date('Y-m-d'),
+            'comments' => $this->faker->realTextBetween(10, 50),
+            'user_id' => 1
         ];
     }
 }

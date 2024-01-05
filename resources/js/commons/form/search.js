@@ -66,7 +66,6 @@ const SearchItems = (props) => {
                 className="item-search"
                 placeholder={text}
                 defaultActiveFirstOption={false}
-                showArrow={false}
                 filterOption={false}
                 onSearch={handleSearch}
                 onChange={handleChange}

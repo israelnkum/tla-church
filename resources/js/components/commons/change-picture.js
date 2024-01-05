@@ -52,14 +52,14 @@ export default function ChangePicture (props) {
                         <Button type={'primary'} icon={<UploadOutlined />}>{!hasFile  ? 'Change' : 'Select File'}</Button>
                     </Upload> :
                     <>
-                        <ImgCrop rotate>
+                        <ImgCrop rotationSlider>
                             <Upload {...uploadProps} onPreview={onPreview}>
                                 {hasFile  ? 'Change' : 'Select'}
                             </Upload>
                         </ImgCrop>
                         <Modal
                             width={400}
-                            visible={preview.visible}
+                            open={preview.visible}
                             title={preview.title}
                             footer={null}
                             onCancel={() => { setPreview({ visible: false }) }}>

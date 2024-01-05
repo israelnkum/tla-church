@@ -1,15 +1,13 @@
 import React, {useState} from 'react'
-import {connect} from "react-redux";
+import {connect, useSelector} from "react-redux";
 import Chart from 'react-apexcharts'
 
 import ViewAllWrapper from "../../../../commons/view-all-wrapper";
 import {Card} from "antd";
-import Filter from "../filter";
-import {handleGetChartData} from "../../../../actions/member/MemberAction";
 import PropTypes from "prop-types";
 
-function CashUp ({ getChartData, data }) {
-    const [loading, setLoading] = useState(false)
+function CashUp () {
+    const data = useSelector(state => state.dashboardReducer?.statistics)
     const chartData = {
         options: {
             dataLabels: {enabled: false},
@@ -35,18 +33,15 @@ function CashUp ({ getChartData, data }) {
                     }
                 }
             }],
-            labels: data.labels
-        }, series: data.series
+            labels: data?.status ? Object.keys(data?.status) : []
+        }, series: data?.status ? Object.values(data?.status) : []
     }
 
     return (
         <ViewAllWrapper loading={false} noData={false}>
             <Card size={'small'}
-                  loading={loading}
-                  title={'CASH UP'}
-                  actions={[
-                      <Filter key={'Filter'} callback={getChartData} setLoading={setLoading}/>
-                  ]}>
+                  loading={false}
+                  title={'Member Status'}>
                 <div align={'center'}>
                     <Chart
                         options={chartData.options}
@@ -58,19 +53,6 @@ function CashUp ({ getChartData, data }) {
     )
 }
 
-CashUp.propTypes = {
-    getChartData: PropTypes.func.isRequired,
-    data: PropTypes.object.isRequired,
-}
 
-const mapStateToProps = (state) => {
-    return {
-        data: state.cashUpsReducer.chart
-    }
-}
 
-const mapDispatchDispatchToProps = (dispatch) => ({
-    getChartData:(data) => dispatch(handleGetChartData(data))
-})
-
-export default connect(mapStateToProps, mapDispatchDispatchToProps)(CashUp)
+export default connect(null, null)(CashUp)

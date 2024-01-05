@@ -1,8 +1,7 @@
 import React from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
 import { connect } from 'react-redux'
-import ProfileBg from '../../assets/img/dashboard/profile-bg.svg'
-import Avatar from '../../assets/img/profile/avata.svg'
+import Avatar from '../../assets/icons/avata.svg'
 import { Image } from 'antd'
 import PropTypes from 'prop-types'
 
@@ -35,7 +34,7 @@ const GlobalStyles = createGlobalStyle`
   }
 `
 const ProfileContainer = styled.div`
-  background: url(${ProfileBg}) center center no-repeat;
+   // background: url($//{ProfileBg}) center center no-repeat;
   border-radius: 0 10px 0 0;
   height: 100px;
 `

@@ -1,75 +1,75 @@
-import React, {useState} from 'react'
-import {connect} from "react-redux";
+import React from 'react'
+import {connect, useSelector} from "react-redux";
 import Chart from 'react-apexcharts'
 import ViewAllWrapper from "../../../../commons/view-all-wrapper";
 import {Card} from "antd";
-import Filter from "../filter";
-import PropTypes from "prop-types";
-import {handleGetChartData} from "../../../../actions/expenses/ExpensesAction";
 
-function ExpensesChart ({ getChartData, data }) {
-    const [loading, setLoading] = useState(false)
+function ExpensesChart () {
+    const data = useSelector(state => state.dashboardReducer?.statistics)
     const chartData = {
+        series: [{
+            name: 'Total',
+            data: data?.classGroups ? Object.values(data?.classGroups) : []
+        }],
         options: {
-            dataLabels: {enabled: false},
+            chart: {
+                height: 350,
+                type: 'bar',
+            },
             plotOptions: {
-                pie: {
-                    donut: {
-                        size: '60%'
-                    }
-                }
-            },
-            legend: {
-                show: true,
-                position: 'bottom',
-            },
-            responsive: [{
-                breakpoint: 480,
-                options: {
-                    chart: {
-                        width: 300
+                bar: {
+                    borderRadius: 10,
+                    dataLabels: {
+                        position: 'top', // top, center, bottom
                     },
-                    legend: {
-                        position: 'bottom'
-                    }
                 }
-            }],
-            labels: data.labels
-        }, series: data.series
+            },
+            dataLabels: {
+                enabled: false,
+                offsetY: -20,
+                style: {
+                    fontSize: '12px',
+                    colors: ["#304758"]
+                }
+            },
+
+            xaxis: {
+                categories: data?.classGroups ? Object.keys(data?.classGroups) : [],
+                crosshairs: {
+                    fill: {
+                        type: 'gradient',
+                        gradient: {
+                            colorFrom: '#D8E3F0',
+                            colorTo: '#BED1E6',
+                            stops: [0, 100],
+                            opacityFrom: 0.4,
+                            opacityTo: 0.5,
+                        }
+                    }
+                },
+                tooltip: {
+                    enabled: true,
+                }
+            },
+            yaxis: {
+                labels: {
+                    show: true
+                }
+            }
+        },
     }
 
     return (
         <ViewAllWrapper loading={false} noData={false}>
             <Card size={'small'}
-                  loading={loading}
-                  title={'EXPENSES'}
-                  actions={[
-                      <Filter key={'Filter'} callback={getChartData} setLoading={setLoading}/>
-                  ]}>
+                  loading={false}
+                  title={'Class Distribution'}>
                 <div align={'center'}>
-                    <Chart
-                        options={chartData.options}
-                        series={chartData.series}
-                        type="donut" width="380" />
+                    <Chart options={chartData.options} series={chartData.series} type="bar" width="430" />
                 </div>
             </Card>
         </ViewAllWrapper>
     )
 }
 
-ExpensesChart.propTypes = {
-    getChartData: PropTypes.func.isRequired,
-    data: PropTypes.object.isRequired,
-}
-
-const mapStateToProps = (state) => {
-    return {
-        data: state.expensesReducer.chart
-    }
-}
-
-const mapDispatchDispatchToProps = (dispatch) => ({
-    getChartData:(data) => dispatch(handleGetChartData(data))
-})
-
-export default connect(mapStateToProps, mapDispatchDispatchToProps)(ExpensesChart)
+export default connect(null, null)(ExpensesChart)

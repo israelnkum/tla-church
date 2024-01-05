@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\EmployeeExport;
+use App\Exports\MemberExport;
 use App\Helpers\HelperFunctions;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
@@ -31,7 +31,7 @@ class EmployeeController extends Controller
     {
         $employees = Employee::query();
         if ($request->has('export') && $request->export === 'true'){
-            return  Excel::download(new EmployeeExport(EmployeeResource::collection($employees->get())), 'Suppliers.xlsx');
+            return  Excel::download(new MemberExport(EmployeeResource::collection($employees->get())), 'Suppliers.xlsx');
         }
 
         if ($request->has('print') && $request->print === 'true'){

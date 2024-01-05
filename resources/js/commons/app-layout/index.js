@@ -10,11 +10,6 @@ import ChangePassword from "../change-password";
 
 const AppLayout = (props) => {
     const [loading, setLoading] = useState(true)
-    const [open, setOpen] = useState(true)
-
-    const toggle = () => {
-        setOpen(!open)
-    }
     const { children, getRoles, authUser } = props
     useEffect(() => {
         setLoading(true)
@@ -27,10 +22,10 @@ const AppLayout = (props) => {
             {
                 (!loading && authUser.default_password !== null) ?
                     <ChangePassword/> :
-                    <Layout>
-                        <AppSidebar setCollapsed={toggle} collapsed={open}/>
-                        <Layout style={{ marginLeft: isMobile ? 0 : (open ? 80 : 200) }}>
-                            <Layout.Content className={'max-w-screen-2xl'} style={{ margin: '0 15px 50px' }}>
+                    <Layout className={'max-w-screen-2xl mx-auto'}>
+                        <AppSidebar/>
+                        <Layout>
+                            <Layout.Content style={{ margin: '0 15px 50px' }}>
                                 <AppHeader/>
                                 <div style={{ minHeight: '100vh', marginTop: 10 }}>
                                     {children}
@@ -54,7 +49,7 @@ const mapStateToProps = (state) => ({
 
 
 const mapDispatchToProps = (dispatch) => ({
-    getRoles: () => dispatch(getActiveRoles('21993de6-123a-54c68c0b-1044-41a9-b084-32bfafe6bc84-4ae1-8f09-67e9640df8d6'))
+    getRoles: () => dispatch(getActiveRoles('21993de6-123a-54c68c0'))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppLayout)

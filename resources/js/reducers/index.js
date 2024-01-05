@@ -3,17 +3,11 @@ import { persistReducer } from 'redux-persist'
 import sessionStorage from 'redux-persist/lib/storage/session'
 import employeeReducer from './employee-reducer'
 import userReducer from './UserReducer'
-import expensesReducer from "./expenses-reducer";
-import suppliersReducer from "./suppliers-reducer";
-import trucksReducer from "./trucks-reducer";
 import memberReducer from "./member-reducer";
-import dispatchOrderReducer from "./dispatch-order-reducer";
-import productReducer from "./product-reducer";
 import commonReducer from "./common-reducer";
-import receivedOrdersReducer from "./received-orders-reducer";
-import businessReducer from "./company-reducer";
-import returnOrdersReducer from "./order-returns-reducer";
 import dashboardReducer from "./dashboard-reducer";
+import recordReducer from "./account-reducer";
+import moneyReducer from "./money-reducer";
 
 const persistConfig = {
     key: 'root',
@@ -21,34 +15,22 @@ const persistConfig = {
     whitelist: [
         'employeeReducer',
         'userReducer',
-        'expensesReducer',
-        'suppliersReducer',
-        'trucksReducer',
         'memberReducer',
-        'dispatchOrderReducer',
-        'productReducer',
         'commonReducer',
-        'receivedOrdersReducer',
-        'businessReducer',
-        'returnOrdersReducer',
         'dashboardReducer',
+        'recordReducer',
+        'moneyReducer',
     ]
 }
 
 const rootReducer = combineReducers({
     employeeReducer,
     userReducer,
-    expensesReducer,
-    suppliersReducer,
-    trucksReducer,
     memberReducer,
-    dispatchOrderReducer,
-    productReducer,
     commonReducer,
-    receivedOrdersReducer,
-    businessReducer,
-    returnOrdersReducer,
     dashboardReducer,
+    recordReducer,
+    moneyReducer,
 })
 
 export default persistReducer(persistConfig, rootReducer)

@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 import WidgetItem from '../../../commons/widget/widget-item'
 import {handleGetDashboardData} from "../../../actions/dashboard/DashboardAction";
 import PropTypes from "prop-types";
-import {capitalize} from "../../../utils";
 
 function Statistics({ statistics, handleGetDashboardData }) {
     const [loading, setLoading] = useState(true)
@@ -12,14 +11,22 @@ function Statistics({ statistics, handleGetDashboardData }) {
         handleGetDashboardData().then(() => setLoading(false))
     }, [])
     return (
-        <Row gutter={[20, 20]} justify={'space-between'} style={{ marginBottom: 15}}>
-            {
-                Object.keys(statistics).map((stats) => (
-                    <Col key={stats} span={6} xs={24} sm={6} md={6} lg={6}>
-                        <WidgetItem title={`Total ${capitalize(stats.replaceAll('_', ' '))}`} value={statistics[stats]}/>
-                    </Col>
-                ))
-            }
+        <Row gutter={[20, 20]} style={{ marginBottom: 15}}>
+            <Col span={8} xs={24} sm={8} md={8} lg={8}>
+                <WidgetItem title={'Total Classes'} value={statistics?.classes}/>
+            </Col>
+            <Col span={8} xs={24} sm={8} md={8} lg={8}>
+                <WidgetItem title={'Total Members'} value={statistics?.members}/>
+            </Col>
+            <Col span={8} xs={24} sm={8} md={8} lg={8}>
+                <WidgetItem title={'Active Members'} value={statistics?.status?.active}/>
+            </Col>
+            <Col span={8} xs={24} sm={8} md={8} lg={8}>
+                <WidgetItem title={'Invalid Members'} value={statistics?.status?.invalid}/>
+            </Col>
+            <Col span={8} xs={24} sm={8} md={8} lg={8}>
+                <WidgetItem title={'Deceased Members'} value={statistics?.status?.deceased}/>
+            </Col>
         </Row>
     )
 }

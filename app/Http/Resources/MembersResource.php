@@ -33,8 +33,8 @@ class MembersResource extends JsonResource
                 'name' => $this->memberClass->name
             ],
             'status' => $this->status,
-            'user_id' => $this->user_id,
-            'user' => $this->user,
+            'photo' => $this->photo ? env('APP_URL').'/storage/members/'.$this->photo?->file_name: null,
+            'user_id' => $this->user_id
         ];
     }
 }

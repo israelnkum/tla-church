@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import PageWrapper from "../../components/admin/page-wrapper";
 import AllMembers from "../../components/members/all-members";
+import accountsRoutes from "./accounts-routes";
 
 const ProtectedRoutes = () => {
     const location = useLocation()
@@ -15,19 +16,20 @@ const ProtectedRoutes = () => {
     return (
         <>
             <Routes location={background || location}>
+                {accountsRoutes}
                 <Route exact element={<Dashboard/>} path='/'>
-                    <Route exact path='js/*'  element={<Dashboard/>}/>
-                    <Route exact path='home'  element={<Dashboard/>}/>
+                    <Route exact path='js/*' element={<Dashboard/>}/>
+                    <Route exact path='home' element={<Dashboard/>}/>
+                    <Route exact path='members' element={<Dashboard/>}/>
                 </Route>
-
                 <Route path='*' element={<PageWrapper/>}>
-                    <Route path='members' element={<AllMembers/>}/>
+                    <Route path='members/all' element={<AllMembers/>}/>
                 </Route>
                 <Route exact>
                     <>not found</>
                 </Route>
             </Routes>
-            {background && (<><ModalRoutes/> <Outlet /></>)}
+            {background && (<><ModalRoutes/> <Outlet/></>)}
         </>
     )
 }
