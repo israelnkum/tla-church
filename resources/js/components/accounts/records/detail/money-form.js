@@ -77,11 +77,19 @@ function MoneyForm(props) {
                            ]}>
                     <Input className={'w-full'} size={'large'}/>
                 </Form.Item>
+
                 <div>
                     <Form.Item name="comments" label="Comments">
                         <Input.TextArea size={'large'}/>
                     </Form.Item>
                 </div>
+                {
+                    state?.data?.member &&
+                    <div className={'rounded-lg border p-2'}>
+                        <p>Member: {state?.data?.member?.name}</p>
+                    </div>
+                }
+
                 <Members form={form}/>
             </div>
         </TlaModalFormWrapper>

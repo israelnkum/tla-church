@@ -16,10 +16,10 @@ function Detail() {
     return (
         <Affix offsetTop={100}>
             <div className={'flex gap-x-3 mt-2'}>
-                <div className={'w-10/12'}>
+                <div className={'w-4/5'}>
                     <AccountRecords/>
                 </div>
-                <div>
+                <div className={'grow'}>
                     <AccountDetail/>
                 </div>
             </div>

@@ -45,7 +45,7 @@ function AccountRecords(props) {
                             }
                         </div>
                     )}/>
-                    <Column title="amount" dataIndex={'amount'}/>
+                    <Column title="amount (ghc)" dataIndex={'amount'}/>
                     <Column title="comments" dataIndex={'comments'}/>
                     <Column title="added by" render={({staff, photo}) => (
                         <div className={'flex items-center gap-x-2'}>

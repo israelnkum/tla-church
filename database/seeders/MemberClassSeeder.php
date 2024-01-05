@@ -18,7 +18,8 @@ class MemberClassSeeder extends Seeder
         $classes = [
             'Freeman',
             'Emmanuel',
-            'DeGraft'
+            'DeGraft',
+            'Children'
         ];
 
         foreach ($classes as $class){

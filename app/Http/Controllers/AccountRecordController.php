@@ -23,7 +23,8 @@ class AccountRecordController extends Controller
      */
     public function index(): AnonymousResourceCollection
     {
-        return AccountRecordResource::collection(AccountRecord::paginate(10));
+        $data = AccountRecordResource::collection(AccountRecord::paginate(10));
+        return $data->collection->sortByDesc('created_at');
     }
 
     /**

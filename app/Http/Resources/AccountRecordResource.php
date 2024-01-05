@@ -21,6 +21,7 @@ class AccountRecordResource extends JsonResource
             'amount' => $this->amount,
             'comments' => $this->comments,
             'user_id' => $this->user_id,
+            'member_id' => $this->member_id,
             'member' => $this->member ? [
                 'name' => $this->member?->name,
                 'photo' =>  $this->member->photo?->file_name ? env('APP_URL').'/storage/members/'.$this->member->photo?->file_name : null,
