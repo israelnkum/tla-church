@@ -30,14 +30,15 @@ function AllMembers(props) {
             <FilterMembers/>
             <ViewAllWrapper loading={loading} noData={data.length === 0}>
                 <TlaTableWrapper filterObj={filter} callbackFunction={getMembers} data={data} meta={meta}>
-                    <Column title="photo" render={({name, photo}) => (
-                        <TlaImage preview name={name} src={photo} size={40}/>
-                    )}/> <Column title="Name" render={({name, status}) => (
-                    <Space direction={'vertical'}>
-                        <Typography.Text>{name}</Typography.Text>
-                        <Tag>{status}</Tag>
-                    </Space>
-                )}/>
+                    <Column title="Name" render={({name, status, photo}) => (
+                        <Space>
+                            <TlaImage preview name={name} src={photo} size={40}/>
+                            <Space direction={'vertical'} size={'small'}>
+                                <Typography.Text>{name}</Typography.Text>
+                                <Tag>{status}</Tag>
+                            </Space>
+                        </Space>
+                    )}/>
                     <Column title="class" dataIndex={['member_class', 'name']}/>
                     <Column title="phone number" render={({phone_number, alt_phone_number}) => (
                         <Space direction={'vertical'}>

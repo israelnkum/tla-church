@@ -4,7 +4,6 @@ import {useOutletContext} from 'react-router'
 import AccountRecords from "./account-records";
 import AccountDetail from "./account-detail";
 import {useParams} from "react-router-dom";
-import {Affix} from "antd";
 
 function Detail() {
     const { id } = useParams()
@@ -14,8 +13,8 @@ function Detail() {
     }, [])
 
     return (
-        <Affix offsetTop={100}>
-            <div className={'flex gap-x-3 mt-2'}>
+        // <Affix offsetTop={100}>
+            <div className={'flex gap-x-3 mt-2 pb-5'}>
                 <div className={'w-4/5'}>
                     <AccountRecords/>
                 </div>
@@ -23,7 +22,7 @@ function Detail() {
                     <AccountDetail/>
                 </div>
             </div>
-        </Affix>
+        // </Affix>
     )
 }
 

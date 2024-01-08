@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Enums\AccountRecordType;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class MembersResource extends JsonResource
@@ -31,6 +32,12 @@ class MembersResource extends JsonResource
             'member_class_id' => $this->member_class_id,
             'member_class' => [
                 'name' => $this->memberClass->name
+            ],
+            'finances' => [
+                'donations' => $this->accountRecords()->where('type', AccountRecordType::DONATION->value)->sum('amount'),
+                'pledges' => $this->accountRecords()->where('type', AccountRecordType::PLEDGE->value)->sum('amount'),
+                'thanksgiving' => $this->accountRecords()->where('type', AccountRecordType::THANKSGIVING->value)->sum('amount'),
+                'tithe' => $this->accountRecords()->where('type', AccountRecordType::TITHE->value)->sum('amount'),
             ],
             'status' => $this->status,
             'photo' => $this->photo ? env('APP_URL').'/storage/members/'.$this->photo?->file_name: null,

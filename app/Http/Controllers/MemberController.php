@@ -171,6 +171,7 @@ class MemberController extends Controller
         $products = Member::query()
             ->where('last_name', 'like', '%' . $query . '%')
             ->orWhere('other_names', 'like', '%' . $query . '%')
+            ->orWhere('first_name', 'like', '%' . $query . '%')
             ->orWhere('email', 'like', '%' . $query . '%')->get();
         return MembersResource::collection($products);
     }

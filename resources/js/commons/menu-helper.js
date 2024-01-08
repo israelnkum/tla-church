@@ -7,7 +7,7 @@ import {useLocation} from 'react-router'
 
 const rootSubmenuKeys = []
 
-function MenuHelper({activeRoles, menus, direction, icons, linkStyles, disabled}) {
+function MenuHelper({activeRoles, permissions, menus, direction, icons, linkStyles, disabled}) {
     const location = useLocation()
     const [openKeys, setOpenKeys] = useState([])
 
@@ -76,10 +76,12 @@ MenuHelper.defaultProps = {
     direction: 'horizontal',
     icons: {},
 }
+
 MenuHelper.propTypes = {
     menus: PropTypes.array.isRequired,
     direction: PropTypes.string,
     activeRoles: PropTypes.array.isRequired,
+    permissions: PropTypes.array.isRequired,
     icons: PropTypes.object,
     disabled: PropTypes.bool.isRequired,
     linkStyles: PropTypes.object,
@@ -87,7 +89,8 @@ MenuHelper.propTypes = {
 
 const mapStateToProps = () => {
     return {
-        activeRoles: ['Admin']
+        activeRoles: ['Admin'],
+        permissions: ['Admin'],
     }
 }
 

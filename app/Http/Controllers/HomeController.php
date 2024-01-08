@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Account;
+use App\Models\AccountRecord;
 use App\Models\Expense;
 use App\Models\Member;
 use App\Models\MemberClass;
@@ -51,6 +53,12 @@ class HomeController extends Controller
             'status' => $status->all(),
             'classGroups' => $me
         ]);
+    }
+
+    public function getAccountDashboardDAta()
+    {
+        $accountRecords = Account::query()->count();
+        $totalAmount = AccountRecord::query()->sum('amount');
     }
 
 }

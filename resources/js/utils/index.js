@@ -76,21 +76,55 @@ export const SidebarMenus = {
             icon: 'home'
         },
         {
-            title: 'Add Record',
-            link: '/accounts/records/form',
-            children: [],
+            title: 'Records',
+            link: '#',
+            children: [
+                {
+                    title: 'Add Record',
+                    link: '/accounts/records/form',
+                    children: [],
+                    permission: '',
+                    icon: 'add-record',
+                    modal: true
+                },
+                {
+                    title: 'All Records',
+                    link: '/accounts/records',
+                    children: [],
+                    permission: '',
+                    icon: 'records',
+                    modal: false
+                }
+            ],
             permissions: ['Admin'],
-            icon: 'pim',
-            modal: true
-        },
-        {
-            title: 'All Records',
-            link: '/accounts/records',
-            children: [],
-            permissions: ['Admin'],
-            icon: 'pim',
+            icon: 'records',
             modal: false
         },
+        {
+            title: 'Expenses',
+            link: '#',
+            children: [
+                {
+                    title: 'Add Expenses',
+                    link: '/accounts/expenses/form',
+                    children: [],
+                    permission: '',
+                    icon: 'add',
+                    modal: true
+                },
+                {
+                    title: 'All Expenses',
+                    link: '/accounts/expenses',
+                    children: [],
+                    permission: '',
+                    icon: 'expenses',
+                    modal: false
+                }
+            ],
+            permissions: ['Admin'],
+            icon: 'expenses',
+            modal: false
+        }
     ]
 }
 
@@ -98,7 +132,7 @@ export const expensesCategories = [
     'Fuel',
     'Salary',
     'Utility',
-    'Bills',
+    'Bills'
 ]
 
 export const moneyTypes = [
